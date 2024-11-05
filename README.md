@@ -38,5 +38,6 @@ The platform primarily focuses on students and educators in academic institution
 * Web Browser
 * Mobile App for iOS and Android Platforms
 
+## 3. Product Design 
 
-
+This Figma file is an overview of what our finished product will look like [RKR Product Design](https://www.figma.com/design/VxfMAuwL3FKCmFUHRiJ5Ur/Untitled?node-id=0-1&t=anGVf67MuIGI2g6t-1)
