@@ -47,7 +47,9 @@ export async function startMessageConsumer(){
             }
             try {
             const newMessage =new messages({
-                message:message.value.toString(),
+                message:JSON.parse(message.value.toString()).roommessage.message,
+                room:JSON.parse(message.value.toString()).roommessage.room,
+                username:JSON.parse(message.value.toString()).roommessage.username
             });
             await newMessage.save();} catch (error) {
                 console.log(error)

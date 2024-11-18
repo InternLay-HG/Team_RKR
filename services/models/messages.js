@@ -8,6 +8,14 @@ const messageSchema=new mongoose.Schema({
         type:Date,
         default:Date.now
     },
+    room:{
+        type:String,
+        required:true
+    },
+    username:{
+        type:String,
+        required:true
+    }
 })
 const messages=mongoose.model("messages",messageSchema);
 export default messages;

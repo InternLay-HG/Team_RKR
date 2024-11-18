@@ -17,6 +17,11 @@
     </style>
   </head>
   <body>
+    <form id="roomjoin">
+      <input id="username" type="text" placeholder="Enter your username" required>
+      <input id="room" type="text" placeholder="Enter room ID" required>
+      <button type="submit">Join Room</button>
+    </form>
     <ul id="messages"></ul>
     <form id="form" action="">
       <input id="input" autocomplete="off" /><button>Send</button>
@@ -25,11 +30,17 @@
   <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io();
-
+ const joinroom=document.getElementById('roomjoin');
   const form = document.getElementById('form');
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
-
+ let username,room
+  joinroom.addEventListener('submit', (e) => {
+    e.preventDefault();
+    username=document.getElementById('username').value;
+    room=document.getElementById('room').value;
+    socket.emit('joinroom', {username,room});
+  });
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (input.value) {
