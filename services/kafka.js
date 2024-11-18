@@ -8,7 +8,7 @@ dotenv.config();
 const kafka = new Kafka({
     brokers:[process.env.KAFKA_URL],
     ssl:{
-        ca:[fs.readFileSync(path.resolve('./ca.pem'),"utf-8")],
+        ca:[fs.readFileSync(path.resolve('./services/ca.pem'),"utf-8")],
     },
     sasl:{
         mechanism:"plain",

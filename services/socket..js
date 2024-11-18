@@ -9,17 +9,12 @@ import { startMessageConsumer } from './kafka.js';
 import messages from './models/messages.js';
 import { getObjectURL,putObject,deleteObject } from './aws.js';
 
+import db from '../db.js';
 import { produceMessage } from './kafka.js';
 dotenv.config();
 import express from 'express';
-const connect = mongoose.connect("mongodb://localhost:27017/Interlay");
-connect.then(() => {
-  console.log("Database connected successfully");
-}).catch((err) => {
-  console.log(err);
-});
+db();
 const serviceurl=process.env.REDIS_URL;
-console.log(serviceurl);
 
 const pub=new Redis(serviceurl);
 const sub=new Redis(serviceurl);
@@ -28,21 +23,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 const __dirname = dirname(fileURLToPath(import.meta.url));
-app.get('/uploads/:key',async (req,res)=>{
-  const key=req.params.key;
-  const url=await getObjectURL(key);
-  res.send(url);
-});
-app.post('/uploads',async (req,res)=>{
-  const {filename,contentType}=req.body;
-  const url=await putObject(filename,contentType);
-  res.send(url);
-});
-app.delete('/uploads/:key', async (req, res) => {
-  const key = req.params.key;
-  await deleteObject(key);
-  res.send("File deleted");
-});
+
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'index.html'));
 });
